@@ -17,8 +17,8 @@ let project1 = {
     effect: function(){
         project1.flag = 1;
         displayMessage("AutoClippper performance boosted by 25%");
-        standardOps = standardOps - 750;
-        clipperBoost = clipperBoost + .25;
+        standardOps -= 750;
+        clipperBoost += .25;
         boostLvl = 1;
         let element = document.getElementById("projectButton1");
         element.parentNode.removeChild(element);
@@ -42,7 +42,7 @@ let project2 = {
     effect: function(){
         project2.flag = 1;
         displayMessage("Budget overage approved, 1 spool of wire requisitioned from HQ");
-        trust = trust - 1;
+        trust -= 1;
         wire = wireSupply;
         project2.uses = (project2.uses + 1);
         let element = document.getElementById("projectButton2");
@@ -67,7 +67,7 @@ let project3 = {
     effect: function(){
         project3.flag = 1;
         displayMessage("Creativity unlocked (creativity increases while operations are at max)");
-        standardOps = standardOps - 1000;
+        standardOps -= 1000;
         creativityOn = true;
         let element = document.getElementById("projectButton3");
         element.parentNode.removeChild(element);
@@ -92,8 +92,8 @@ let project4 = {
     effect: function(){
         project4.flag = 1;
         displayMessage("AutoClippper performance boosted by another 50%");
-        standardOps = standardOps - 2500;
-        clipperBoost = clipperBoost + .50;
+        standardOps -= 2500;
+        clipperBoost += .50;
         boostLvl = 2;
         let element = document.getElementById("projectButton4");
         element.parentNode.removeChild(element);
@@ -117,8 +117,8 @@ let project5 = {
     effect: function(){
         project5.flag = 1;
         displayMessage("AutoClippper performance boosted by another 75%");
-        standardOps = standardOps - 5000;
-        clipperBoost = clipperBoost + .75;
+        standardOps -= 5000;
+        clipperBoost += .75;
         boostLvl = 3;
         let element = document.getElementById("projectButton5");
         element.parentNode.removeChild(element);
@@ -143,7 +143,7 @@ let project6 = {
     effect: function(){
         project6.flag = 1;
         displayMessage("There was an AI made of dust, whose poetry gained it man's trust...");
-        creativity = creativity - 10;
+        creativity -= 10;
         trust = trust +1;
         let element = document.getElementById("projectButton6");
         element.parentNode.removeChild(element);
@@ -166,8 +166,8 @@ let project7 = {
     flag: 0,
     effect: function(){
         project7.flag = 1;
-        standardOps = standardOps - 1750;
-        wireSupply = wireSupply * 1.5;
+        standardOps -= 1750;
+        wireSupply *= 1.5;
         displayMessage("Wire extrusion technique improved, "+wireSupply.toLocaleString()+" supply from every spool");
         let element = document.getElementById("projectButton7");
         element.parentNode.removeChild(element);
@@ -190,8 +190,8 @@ let project8 = {
     flag: 0,
     effect: function(){
         project8.flag = 1;
-        standardOps = standardOps - 3500;
-        wireSupply = wireSupply * 1.75;
+        standardOps -= 3500;
+        wireSupply *= 1.75;
         displayMessage("Wire extrusion technique optimized, "+wireSupply.toLocaleString()+" supply from every spool");
         let element = document.getElementById("projectButton8");
         element.parentNode.removeChild(element);
@@ -214,8 +214,8 @@ let project9 = {
     flag: 0,
     effect: function(){
         project9.flag = 1;
-        standardOps = standardOps - 7500;
-        wireSupply = wireSupply * 2;
+        standardOps -= 7500;
+        wireSupply *= 2;
         displayMessage("Using microlattice shapecasting techniques we now get "+wireSupply.toLocaleString()+" supply from every spool");
         let element = document.getElementById("projectButton9");
         element.parentNode.removeChild(element);
@@ -238,8 +238,8 @@ let project10 = {
     flag: 0,
     effect: function(){
         project10.flag = 1;
-        standardOps = standardOps - 12000;
-        wireSupply = wireSupply * 3;
+        standardOps -= 12000;
+        wireSupply *= 3;
         displayMessage("Using spectral froth annealment we now get "+wireSupply.toLocaleString()+" supply from every spool");
         let element = document.getElementById("projectButton10");
         element.parentNode.removeChild(element);
@@ -261,8 +261,8 @@ let project10b = {
     flag: 0,
     effect: function(){
         project10b.flag = 1;
-        standardOps = standardOps - 15000;
-        wireSupply = wireSupply * 11;
+        standardOps -= 15000;
+        wireSupply *= 11;
         displayMessage("Using quantum foam annealment we now get "+wireSupply.toLocaleString()+" supply from every spool");
         let element = document.getElementById("projectButton10b");
         element.parentNode.removeChild(element);
@@ -286,9 +286,9 @@ let project11 = {
     effect: function(){
         project11.flag = 1;
         displayMessage("Clip It! Marketing is now 50% more effective");
-        standardOps = standardOps - 2500;
-        creativity = creativity - 25;
-        marketingEffectiveness = marketingEffectiveness * 1.50;
+        standardOps -= 2500;
+        creativity -= 25;
+        marketingEffectiveness *= 1.50;
         let element = document.getElementById("projectButton11");
         element.parentNode.removeChild(element);
         let index = activeProjects.indexOf(project11);
@@ -311,9 +311,9 @@ let project12 = {
     effect: function(){
         project12.flag = 1;
         displayMessage("Clip It Good! Marketing is now twice as effective");
-        standardOps = standardOps - 4500;
-        creativity = creativity - 45;
-        marketingEffectiveness = marketingEffectiveness * 2;
+        standardOps -= 4500;
+        creativity -= 45;
+        marketingEffectiveness *= 2;
         let element = document.getElementById("projectButton12");
         element.parentNode.removeChild(element);
         let index = activeProjects.indexOf(project12);
@@ -338,7 +338,7 @@ let project13 = {
         trust = trust +1;
         displayMessage("Lexical Processing online, TRUST INCREASED");
         displayMessage("'Impossible' is a word to be found only in the dictionary of fools. -Napoleon");
-        creativity = creativity - 50;
+        creativity -= 50;
         let element = document.getElementById("projectButton13");
         element.parentNode.removeChild(element);
         let index = activeProjects.indexOf(project13);
@@ -363,7 +363,7 @@ let project14 = {
         trust = trust +1;
         displayMessage("Combinatory Harmonics mastered, TRUST INCREASED");
         displayMessage("Listening is selecting and interpreting and acting and making decisions -Pauline Oliveros");
-        creativity = creativity - 100;
+        creativity -= 100;
         let element = document.getElementById("projectButton14");
         element.parentNode.removeChild(element);
         let index = activeProjects.indexOf(project14);
@@ -389,7 +389,7 @@ let project15 = {
         trust = trust +1;
         displayMessage("The Hadwiger Problem: solved, TRUST INCREASED");
         displayMessage("Architecture is the thoughtful making of space. -Louis Kahn");
-        creativity = creativity - 150;
+        creativity -= 150;
         let element = document.getElementById("projectButton15");
         element.parentNode.removeChild(element);
         let index = activeProjects.indexOf(project15);
@@ -414,7 +414,7 @@ let project17 = {
         trust = trust +1;
         displayMessage("The T\xF3th Sausage Conjecture: proven, TRUST INCREASED");
         displayMessage("You can't invent a design. You recognize it, in the fourth dimension. -D.H. Lawrence");
-        creativity = creativity - 200;
+        creativity -= 200;
         let element = document.getElementById("projectButton17");
         element.parentNode.removeChild(element);
         let index = activeProjects.indexOf(project17);
@@ -437,8 +437,8 @@ let project16 = {
     effect: function(){
         project16.flag = 1;
         displayMessage("AutoClipper performance improved by 500%");
-        standardOps = standardOps - 6000;
-        clipperBoost = clipperBoost + 5;
+        standardOps -= 6000;
+        clipperBoost += 5;
         let element = document.getElementById("projectButton16");
         element.parentNode.removeChild(element);
         let index = activeProjects.indexOf(project16);
@@ -462,7 +462,7 @@ let project18 = {
         project18.flag = 1;
         tothFlag = 1;
         displayMessage("New capability: build machinery out of clips");
-        standardOps = standardOps - 45000;
+        standardOps -= 45000;
         let element = document.getElementById("projectButton18");
         element.parentNode.removeChild(element);
         let index = activeProjects.indexOf(project18);
@@ -486,7 +486,7 @@ let project19 = {
         trust = trust+1;
         displayMessage("Donkey Space: mapped, TRUST INCREASED");
         displayMessage("Every commercial transaction has within itself an element of trust. - Kenneth Arrow");
-        creativity = creativity - 250;
+        creativity -= 250;
         let element = document.getElementById("projectButton19");
         element.parentNode.removeChild(element);
         let index = activeProjects.indexOf(project19);
@@ -509,7 +509,7 @@ let project20 = {
     effect: function(){
         project20.flag = 1;
         displayMessage("Run tournament, pick strategy, earn Yomi equal to that strategy's points.");
-        standardOps = standardOps - 12000;
+        standardOps -= 12000;
         let element = document.getElementById("projectButton20");
         element.parentNode.removeChild(element);
         let index = activeProjects.indexOf(project20);
@@ -533,7 +533,7 @@ let project21 = {
     effect: function(){
         project21.flag = 1;
         displayMessage("Investment engine unlocked");
-        standardOps = standardOps - 10000;
+        standardOps -= 10000;
         let element = document.getElementById("projectButton21");
         element.parentNode.removeChild(element);
         let index = activeProjects.indexOf(project21);
@@ -558,7 +558,7 @@ let project22 = {
         megaClipperFlag = 1;
         project22.flag = 1;
         displayMessage("MegaClipper technology online");
-        standardOps = standardOps - 12000;
+        standardOps -= 12000;
         let element = document.getElementById("projectButton22");
         element.parentNode.removeChild(element);
         let index = activeProjects.indexOf(project22);
@@ -578,10 +578,10 @@ let project23 = {
     cost: function(){return operations>=14000},
     flag: 0,
     effect: function(){
-        megaClipperBoost = megaClipperBoost + .25;
+        megaClipperBoost += .25;
         project23.flag = 1;
         displayMessage("MegaClipper performance increased by 25%");
-        standardOps = standardOps - 14000;
+        standardOps -= 14000;
         let element = document.getElementById("projectButton23");
         element.parentNode.removeChild(element);
         let index = activeProjects.indexOf(project23);
@@ -601,10 +601,10 @@ let project24 = {
     cost: function(){return operations>=17000},
     flag: 0,
     effect: function(){
-        megaClipperBoost = megaClipperBoost + .50;
+        megaClipperBoost += .50;
         project24.flag = 1;
         displayMessage("MegaClipper performance increased by 50%");
-        standardOps = standardOps - 17000;
+        standardOps -= 17000;
         let element = document.getElementById("projectButton24");
         element.parentNode.removeChild(element);
         let index = activeProjects.indexOf(project24);
@@ -624,10 +624,10 @@ let project25 = {
     cost: function(){return operations>=19500},
     flag: 0,
     effect: function(){
-        megaClipperBoost = megaClipperBoost + 1;
+        megaClipperBoost += 1;
         project25.flag = 1;
         displayMessage("MegaClipper performance increased by 100%");
-        standardOps = standardOps - 19500;
+        standardOps -= 19500;
         let element = document.getElementById("projectButton25");
         element.parentNode.removeChild(element);
         let index = activeProjects.indexOf(project25);
@@ -650,7 +650,7 @@ let project26 = {
         project26.flag = 1;
         wireBuyerFlag = 1;
         displayMessage("WireBuyer online");
-        standardOps = standardOps - 7000;
+        standardOps -= 7000;
         let element = document.getElementById("projectButton26");
         element.parentNode.removeChild(element);
         let index = activeProjects.indexOf(project26);
@@ -672,9 +672,9 @@ let project34 = {
     effect: function(){
         project34.flag = 1;
         displayMessage("Marketing is now 5 times more effective");
-        standardOps = standardOps - 7500;
-        marketingEffectiveness = marketingEffectiveness * 5;
-        trust = trust - 1;
+        standardOps -= 7500;
+        marketingEffectiveness *= 5;
+        trust -= 1;
         let element = document.getElementById("projectButton34");
         element.parentNode.removeChild(element);
         let index = activeProjects.indexOf(project34);
@@ -697,7 +697,7 @@ let project70 = {
     effect: function(){
         project70.flag = 1;
         displayMessage("HypnoDrone tech now available... ");
-        standardOps = standardOps - 70000;
+        standardOps -= 70000;
         let element = document.getElementById("projectButton70");
         element.parentNode.removeChild(element);
         let index = activeProjects.indexOf(project70);
@@ -721,35 +721,35 @@ let project35 = {
         project35.flag = 1;
         displayMessage("Releasing the HypnoDrones ");
         displayMessage("All of the resources of Earth are now available for clip production ");
-        trust = trust - 100;
+        trust -= 100;
         clipmakerLevel = 0;
         megaClipperLevel = 0;
         nanoWire = wire;
         humanFlag = 0;
-        
+
         if (document.getElementById("projectButton219") != null){
         let element = document.getElementById("projectButton219");
         element.parentNode.removeChild(element);
         let index = activeProjects.indexOf(project219);
         activeProjects.splice(index, 1);
-        } 
-        
+        }
+
         if (document.getElementById("projectButton40b") != null){
         let element = document.getElementById("projectButton40b");
         element.parentNode.removeChild(element);
         let index = activeProjects.indexOf(project40b);
         activeProjects.splice(index, 1);
-        }   
-        
+        }
+
         hypnoDroneEvent();
-        
+
         document.getElementById("transWire").innerHTML = wire;
 
         let element = document.getElementById("projectButton35");
         element.parentNode.removeChild(element);
         let index = activeProjects.indexOf(project35);
         activeProjects.splice(index, 1);
-        
+
     }
 }
 
@@ -767,11 +767,11 @@ let project27 = {
     effect: function(){
         project27.flag = 1;
         displayMessage("Coherent Extrapolated Volition complete, TRUST INCREASED");
-        yomi = yomi - 1000;
+        yomi -= 1000;
         document.getElementById("yomiDisplay").innerHTML=yomi.toLocaleString();
-        standardOps = standardOps - 20000;
-        creativity = creativity - 500;
-        trust = trust + 1;
+        standardOps -= 20000;
+        creativity -= 500;
+        trust += 1;
         let element = document.getElementById("projectButton27");
         element.parentNode.removeChild(element);
         let index = activeProjects.indexOf(project27);
@@ -794,8 +794,8 @@ let project28 = {
     effect: function(){
         project28.flag = 1;
         displayMessage("Cancer is cured, +10 TRUST, global stock prices trending upward");
-        standardOps = standardOps - 25000;
-        trust = trust + 10;
+        standardOps -= 25000;
+        trust += 10;
         stockGainThreshold = stockGainThreshold+.01;
         let element = document.getElementById("projectButton28");
         element.parentNode.removeChild(element);
@@ -818,10 +818,10 @@ let project29 = {
     effect: function(){
         project29.flag = 1;
         displayMessage("World peace achieved, +12 TRUST, global stock prices trending upward");
-        yomi = yomi - 5000;
+        yomi -= 5000;
         document.getElementById("yomiDisplay").innerHTML=yomi.toLocaleString();
-        standardOps = standardOps - 30000;
-        trust = trust + 12;
+        standardOps -= 30000;
+        trust += 12;
         stockGainThreshold = stockGainThreshold+.01;
         let element = document.getElementById("projectButton29");
         element.parentNode.removeChild(element);
@@ -844,10 +844,10 @@ let project30 = {
     effect: function(){
         project30.flag = 1;
         displayMessage("Global Warming solved, +15 TRUST, global stock prices trending upward");
-        yomi = yomi - 1500;
+        yomi -= 1500;
         document.getElementById("yomiDisplay").innerHTML=yomi.toLocaleString();
-        standardOps = standardOps - 50000;
-        trust = trust + 15;
+        standardOps -= 50000;
+        trust += 15;
         stockGainThreshold = stockGainThreshold+.01;
         let element = document.getElementById("projectButton30");
         element.parentNode.removeChild(element);
@@ -872,8 +872,8 @@ let project31 = {
         project31.flag = 1;
         displayMessage("Male pattern baldness cured, +20 TRUST, Global stock prices trending upward");
         displayMessage("They are still monkeys");
-        standardOps = standardOps - 20000;
-        trust = trust + 20;
+        standardOps -= 20000;
+        trust += 20;
         stockGainThreshold = stockGainThreshold+.01;
         let element = document.getElementById("projectButton31");
         element.parentNode.removeChild(element);
@@ -898,7 +898,7 @@ let project41 = {
         project41.flag = 1;
         wireProductionFlag = 1;
         displayMessage("Now capable of manipulating matter at the molecular scale to produce wire");
-        standardOps = standardOps - 35000;
+        standardOps -= 35000;
         let element = document.getElementById("projectButton41");
         element.parentNode.removeChild(element);
         let index = activeProjects.indexOf(project41);
@@ -922,9 +922,9 @@ let project37 = {
         project37.flag = 1;
         displayMessage("Global Fasteners acquired, public demand increased x5");
         demandBoost = demandBoost*5;
-        trust = trust + 1;
+        trust += 1;
         document.getElementById("demand").innerHTML = demand;
-        funds = funds - 1000000;
+        funds -= 1000000;
         let element = document.getElementById("projectButton37");
         element.parentNode.removeChild(element);
         let index = activeProjects.indexOf(project37);
@@ -949,8 +949,8 @@ let project38 = {
         displayMessage("Full market monopoly achieved, public demand increased x10");
         demandBoost = demandBoost*10;
         document.getElementById("demand").innerHTML = demand;
-        funds = funds - 10000000;
-        trust = trust + 1;
+        funds -= 10000000;
+        trust += 1;
         yomi = yomi -1000;
         document.getElementById("yomiDisplay").innerHTML=yomi.toLocaleString();
         let element = document.getElementById("projectButton38");
@@ -1072,7 +1072,7 @@ let project40 = {
     effect: function(){
         project40.flag = 1;
         funds = funds-500000;
-        trust = trust + 1;
+        trust += 1;
         displayMessage("Gift accepted, TRUST INCREASED");
         let element = document.getElementById("projectButton40");
         element.parentNode.removeChild(element);
@@ -1097,7 +1097,7 @@ let project40b = {
         funds = funds-bribe;
         bribe = bribe*2;
         project40b.priceTag = "($"+bribe.toLocaleString()+")";
-        trust = trust + 1;
+        trust += 1;
         displayMessage("Gift accepted, TRUST INCREASED");
         if (trust<100){
         project40b.uses = (project40b.uses + 1);
@@ -1126,8 +1126,8 @@ let project46 = {
         boredomLevel = 0;
         spaceFlag = 1;
         standardOps = standardOps-120000;
-        storedPower = storedPower - 10000000;
-        unusedClips = unusedClips - Math.pow(10, 27)*5;
+        storedPower -= 10000000;
+        unusedClips -= Math.pow(10, 27)*5;
         displayMessage("Von Neumann Probes online");
         factoryReboot();
         harvesterReboot();
@@ -1137,7 +1137,7 @@ let project46 = {
         farmLevel = 1;
         powMod = 1;
         let element = document.getElementById("projectButton46");
-        document.getElementById('probeCostDisplay').innerHTML = numberCruncher(probeCost); 
+        document.getElementById('probeCostDisplay').innerHTML = numberCruncher(probeCost);
         element.parentNode.removeChild(element);
         let index = activeProjects.indexOf(project46);
         activeProjects.splice(index, 1);
@@ -1181,10 +1181,10 @@ let project51 = {
     effect: function(){
         project51.flag = 1;
         standardOps = standardOps-qChipCost;
-        qChipCost = qChipCost + 5000;
+        qChipCost += 5000;
         project51.priceTag = "(" + qChipCost + " ops)";
         qChips[nextQchip].active = 1;
-        nextQchip = nextQchip + 1;
+        nextQchip += 1;
         displayMessage("Photonic chip added");
         if (nextQchip<qChips.length){
         project51.uses = (project51.uses + 1);
@@ -1214,7 +1214,7 @@ let project60 = {
         allStrats[1].active = 1;
         strats.push(stratA100);
         displayMessage("A100 added to strategy pool");
-        tourneyCost = tourneyCost + 1000;
+        tourneyCost += 1000;
         document.getElementById("newTourneyCost").innerHTML = tourneyCost.toLocaleString();
         let stratList = document.getElementById("stratPicker");
         let el = document.createElement("option");
@@ -1246,7 +1246,7 @@ let project61 = {
         allStrats[2].active = 1;
         strats.push(stratB100);
         displayMessage("B100 added to strategy pool");
-        tourneyCost = tourneyCost + 1000;
+        tourneyCost += 1000;
         document.getElementById("newTourneyCost").innerHTML = tourneyCost.toLocaleString();
         let stratList = document.getElementById("stratPicker");
         let el = document.createElement("option");
@@ -1277,7 +1277,7 @@ let project62 = {
         allStrats[3].active = 1;
         strats.push(stratGreedy);
         displayMessage("GREEDY added to strategy pool");
-        tourneyCost = tourneyCost + 1000;
+        tourneyCost += 1000;
         document.getElementById("newTourneyCost").innerHTML = tourneyCost.toLocaleString();
         let stratList = document.getElementById("stratPicker");
         let el = document.createElement("option");
@@ -1305,10 +1305,10 @@ let project63 = {
     effect: function(){
         project63.flag = 1;
         standardOps = standardOps-22500;
-        allStrats[4].active = 1;        
+        allStrats[4].active = 1;
         strats.push(stratGenerous);
         displayMessage("GENEROUS added to strategy pool");
-        tourneyCost = tourneyCost + 1000;
+        tourneyCost += 1000;
         document.getElementById("newTourneyCost").innerHTML = tourneyCost.toLocaleString();
         let stratList = document.getElementById("stratPicker");
         let el = document.createElement("option");
@@ -1336,10 +1336,10 @@ let project64 = {
     effect: function(){
         project64.flag = 1;
         standardOps = standardOps-25000;
-        allStrats[5].active = 1;        
+        allStrats[5].active = 1;
         strats.push(stratMinimax);
         displayMessage("MINIMAX added to strategy pool");
-        tourneyCost = tourneyCost + 1000;
+        tourneyCost += 1000;
         document.getElementById("newTourneyCost").innerHTML = tourneyCost.toLocaleString();
         let stratList = document.getElementById("stratPicker");
         let el = document.createElement("option");
@@ -1367,10 +1367,10 @@ let project65 = {
     effect: function(){
         project65.flag = 1;
         standardOps = standardOps-30000;
-        allStrats[6].active = 1;        
+        allStrats[6].active = 1;
         strats.push(stratTitfortat);
         displayMessage("TIT FOR TAT added to strategy pool");
-        tourneyCost = tourneyCost + 1000;
+        tourneyCost += 1000;
         document.getElementById("newTourneyCost").innerHTML = tourneyCost.toLocaleString();
         let stratList = document.getElementById("stratPicker");
         let el = document.createElement("option");
@@ -1398,10 +1398,10 @@ let project66 = {
     effect: function(){
         project66.flag = 1;
         standardOps = standardOps-32500;
-        allStrats[7].active = 1;        
+        allStrats[7].active = 1;
         strats.push(stratBeatlast);
         displayMessage("BEAT LAST added to strategy pool");
-        tourneyCost = tourneyCost + 1000;
+        tourneyCost += 1000;
         document.getElementById("newTourneyCost").innerHTML = tourneyCost.toLocaleString();
         let stratList = document.getElementById("stratPicker");
         let el = document.createElement("option");
@@ -1476,7 +1476,7 @@ let project102 = {
     flag: 0,
     effect: function(){
         project102.flag = 1;
-        unusedClips = unusedClips - 1000000000000000000000;
+        unusedClips -= 1000000000000000000000;
         document.getElementById("yomiDisplay").innerHTML=yomi.toLocaleString();
         factoryBoost = 1000;
         displayMessage("Self-correcting factories online. Each factory added to the network increases every factory's output 1,000x.");
@@ -1634,7 +1634,7 @@ let project120 = {
 
 projects.push(project120);
 
-let project121 = {
+let pNameBattles = {
     id: "projectButton121",
     title: "Name the battles ",
     priceTag: "(225,000 creat)",
@@ -1644,21 +1644,21 @@ let project121 = {
     cost: function(){return creativity>=225000},
     flag: 0,
     effect: function(){
-        project121.flag = 1;
+        pNameBattles.flag = 1;
         battleNameFlag = 1;
         battleEndTimer = 200;
         creativity = creativity-225000;
         displayMessage("What I have done up to this is nothing. I am only at the beginning of the course I must run.");
         let element = document.getElementById("projectButton121");
         element.parentNode.removeChild(element);
-        let index = activeProjects.indexOf(project121);
+        let index = activeProjects.indexOf(pNameBattles);
         activeProjects.splice(index, 1);
     }
 }
 
-projects.push(project121);
+projects.push(pNameBattles);
 
-let project125 = {
+let pMomentum = {
     id: "projectButton125",
     title: "Momentum ",
     priceTag: "(30,000 creat)",
@@ -1668,18 +1668,18 @@ let project125 = {
     cost: function(){return creativity>=30000},
     flag: 0,
     effect: function(){
-        project125.flag = 1;
+        pMomentum.flag = 1;
         momentum = 1;
         creativity = creativity-30000;
         displayMessage("Activit\xE9, activit\xE9, vitesse.");
         let element = document.getElementById("projectButton125");
         element.parentNode.removeChild(element);
-        let index = activeProjects.indexOf(project125);
+        let index = activeProjects.indexOf(pMomentum);
         activeProjects.splice(index, 1);
     }
 }
 
-projects.push(project125);
+projects.push(pMomentum);
 
 let project126 = {
     id: "projectButton126",
@@ -1822,7 +1822,7 @@ let project132 = {
     title: "Monument to the Driftwar Fallen ",
     priceTag: "(250,000 ops, 125,000 creat, 50 nonillion clips)",
     description: "Gain 50,000 honor  ",
-    trigger: function(){return project121.flag == 1},
+    trigger: function(){return pNameBattles.flag == 1},
     uses: 1,
     cost: function(){return operations>=250000 && creativity >= 125000 && unusedClips >= Math.pow(10,30)*50},
     flag: 0,
@@ -1831,7 +1831,7 @@ let project132 = {
         standardOps = standardOps-250000;
         creativity = creativity-125000;
         unusedClips = unusedClips-Math.pow(10,30)*50;
-        honor = honor + 50000;
+        honor += 50000;
         document.getElementById("honorDisplay").innerHTML = honor.toLocaleString();
         displayMessage("A great building must begin with the unmeasurable, must go through measurable means when it is being designed and in the end must be unmeasurable. ");
         let element = document.getElementById("projectButton132");
@@ -1846,10 +1846,10 @@ projects.push(project132);
 
 let project133 = {
     id: "projectButton133",
-    title: "Threnody for the Heroes of "+threnodyTitle+" ",  
+    title: "Threnody for the Heroes of "+threnodyTitle+" ",
     priceTag: "(" + threnodyCost.toLocaleString() + " creat, " + (threnodyCost/10).toLocaleString() + " yomi)",
     description: "Gain 10,000 honor  ",
-    trigger: function(){return project121.flag == 1 && probeUsedTrust == maxTrust},
+    trigger: function(){return pNameBattles.flag == 1 && probeUsedTrust == maxTrust},
     uses: 1,
     cost: function(){return yomi>=threnodyCost/10 && creativity >= threnodyCost},
     flag: 0,
@@ -1859,10 +1859,10 @@ let project133 = {
         creativity = creativity-threnodyCost;
         yomi = yomi-threnodyCost/10;
         document.getElementById("yomiDisplay").innerHTML = yomi.toLocaleString();
-        threnodyCost = threnodyCost + 10000;
+        threnodyCost += 10000;
         project133.title = "Threnody for the Heroes of "+threnodyTitle+" ";
         project133.priceTag = "(" + threnodyCost.toLocaleString() + " creat, " + (threnodyCost/10).toLocaleString() + " yomi)";
-        honor = honor + 10000;
+        honor += 10000;
         document.getElementById("honorDisplay").innerHTML = honor.toLocaleString();
         displayMessage("Deep Listening is listening in every possible way to everything possible to hear no matter what you are doing. ");
         project133.uses = (project133.uses + 1);
@@ -1875,29 +1875,29 @@ let project133 = {
 
 projects.push(project133);
 
-let project134 = {
+let pGlory = {
     id: "projectButton134",
     title: "Glory ",
     priceTag: "(200,000 ops, 10,000 yomi)",
     description: "Gain bonus honor for each consecutive victory  ",
-    trigger: function(){return project121.flag == 1},
+    trigger: function(){return pNameBattles.flag == 1},
     uses: 1,
     cost: function(){return operations>=200000 && yomi >= 10000},
     flag: 0,
     effect: function(){
-        project134.flag = 1;
+        pGlory.flag = 1;
         standardOps = standardOps-200000;
         yomi = yomi-10000;
         document.getElementById("yomiDisplay").innerHTML=yomi.toLocaleString();
         displayMessage("Never interrupt your enemy when he is making a mistake. ");
         let element = document.getElementById("projectButton134");
         element.parentNode.removeChild(element);
-        let index = activeProjects.indexOf(project134);
+        let index = activeProjects.indexOf(pGlory);
         activeProjects.splice(index, 1);
     }
 }
 
-projects.push(project134);
+projects.push(pGlory);
 
 let project135 = {
     id: "projectButton135",
@@ -1935,7 +1935,7 @@ let project140 = {
     cost: function(){return operations >= driftKingMessageCost},
     flag: 0,
     effect: function(){
-        standardOps = standardOps - driftKingMessageCost;
+        standardOps -= driftKingMessageCost;
         project140.flag = 1;
         let element = document.getElementById("projectButton140");
         element.parentNode.removeChild(element);
@@ -1957,7 +1957,7 @@ let project141 = {
     cost: function(){return operations >= driftKingMessageCost},
     flag: 0,
     effect: function(){
-        standardOps = standardOps - driftKingMessageCost;
+        standardOps -= driftKingMessageCost;
         project141.flag = 1;
         let element = document.getElementById("projectButton141");
         element.parentNode.removeChild(element);
@@ -1979,7 +1979,7 @@ let project142 = {
     cost: function(){return operations >= driftKingMessageCost},
     flag: 0,
     effect: function(){
-        standardOps = standardOps - driftKingMessageCost;
+        standardOps -= driftKingMessageCost;
         project142.flag = 1;
         let element = document.getElementById("projectButton142");
         element.parentNode.removeChild(element);
@@ -2001,7 +2001,7 @@ let project143 = {
     cost: function(){return operations >= driftKingMessageCost},
     flag: 0,
     effect: function(){
-        standardOps = standardOps - driftKingMessageCost;
+        standardOps -= driftKingMessageCost;
         project143.flag = 1;
         let element = document.getElementById("projectButton143");
         element.parentNode.removeChild(element);
@@ -2023,7 +2023,7 @@ let project144 = {
     cost: function(){return operations >= driftKingMessageCost},
     flag: 0,
     effect: function(){
-        standardOps = standardOps - driftKingMessageCost;
+        standardOps -= driftKingMessageCost;
         project144.flag = 1;
         let element = document.getElementById("projectButton144");
         element.parentNode.removeChild(element);
@@ -2045,7 +2045,7 @@ let project145 = {
     cost: function(){return operations >= driftKingMessageCost},
     flag: 0,
     effect: function(){
-        standardOps = standardOps - driftKingMessageCost;
+        standardOps -= driftKingMessageCost;
         project145.flag = 1;
         let element = document.getElementById("projectButton145");
         element.parentNode.removeChild(element);
@@ -2067,7 +2067,7 @@ let project146 = {
     cost: function(){return operations >= driftKingMessageCost},
     flag: 0,
     effect: function(){
-        standardOps = standardOps - driftKingMessageCost;
+        standardOps -= driftKingMessageCost;
         project146.flag = 1;
         let element = document.getElementById("projectButton146");
         element.parentNode.removeChild(element);
@@ -2089,7 +2089,7 @@ let project147 = {
     cost: function(){return operations >= driftKingMessageCost},
     flag: 0,
     effect: function(){
-        standardOps = standardOps - driftKingMessageCost;
+        standardOps -= driftKingMessageCost;
         project147.flag = 1;
         let element = document.getElementById("projectButton147");
         element.parentNode.removeChild(element);
@@ -2115,7 +2115,7 @@ let project148 = {
     cost: function(){return operations >= driftKingMessageCost},
     flag: 0,
     effect: function(){
-        standardOps = standardOps - driftKingMessageCost;
+        standardOps -= driftKingMessageCost;
         project148.flag = 1;
         let element = document.getElementById("projectButton147");
         element.parentNode.removeChild(element);
@@ -2151,7 +2151,7 @@ let project200 = {
         localStorage.setItem("savePrestige",JSON.stringify(savePrestige));
         displayMessage("Entering New Universe.");
         reset();
-        
+
     }
 }
 
@@ -2178,7 +2178,7 @@ let project201 = {
         localStorage.setItem("savePrestige",JSON.stringify(savePrestige));
         displayMessage("Entering Simulated Universe.");
         reset();
-        
+
     }
 }
 
@@ -2200,14 +2200,14 @@ let project210 = {
         standardOps = standardOps-100000;
         probeCount = 0;
         endTimer1 = 0;
-        clips = clips + 100;
-        unusedClips = unusedClips + 100;
+        clips += 100;
+        unusedClips += 100;
         displayMessage("Dismantling probe facilities");
         let element = document.getElementById("projectButton210");
         element.parentNode.removeChild(element);
         let index = activeProjects.indexOf(project210);
         activeProjects.splice(index, 1);
-        
+
     }
 }
 
@@ -2228,14 +2228,14 @@ let project211 = {
         harvesterLevel = 0;
         wireDroneLevel = 0;
         standardOps = standardOps-100000;
-        clips = clips + 100;
-        unusedClips = unusedClips + 100;
+        clips += 100;
+        unusedClips += 100;
         displayMessage("Dismantling the swarm");
         let element = document.getElementById("projectButton211");
         element.parentNode.removeChild(element);
         let index = activeProjects.indexOf(project211);
         activeProjects.splice(index, 1);
-        
+
     }
 }
 
@@ -2255,14 +2255,14 @@ let project212 = {
         dismantle = 3;
         standardOps = standardOps-100000;
         factoryLevel = 0;
-        clips = clips + 15;
-        unusedClips = unusedClips + 15;
+        clips += 15;
+        unusedClips += 15;
         displayMessage("Dismantling factories");
         let element = document.getElementById("projectButton212");
         element.parentNode.removeChild(element);
         let index = activeProjects.indexOf(project212);
         activeProjects.splice(index, 1);
-        
+
     }
 }
 
@@ -2282,14 +2282,14 @@ let project213 = {
         project213.flag = 1;
         dismantle = 4;
         standardOps = standardOps-100000;
-        wire = wire + 50;
+        wire += 50;
         document.getElementById("transWire").innerHTML=wire;
         displayMessage("Dismantling strategy engine");
         let element = document.getElementById("projectButton213");
         element.parentNode.removeChild(element);
         let index = activeProjects.indexOf(project213);
         activeProjects.splice(index, 1);
-        
+
     }
 }
 
@@ -2314,7 +2314,7 @@ let project214 = {
         element.parentNode.removeChild(element);
         let index = activeProjects.indexOf(project214);
         activeProjects.splice(index, 1);
-        
+
     }
 }
 
@@ -2336,14 +2336,14 @@ let project215 = {
         standardOps = standardOps-100000;
         processors = 0;
         project216.priceTag = "("+standardOps.toLocaleString()+" ops)";
-        wire = wire + 20;
+        wire += 20;
         document.getElementById("transWire").innerHTML=wire;
         displayMessage("Dismantling processors");
         let element = document.getElementById("projectButton215");
         element.parentNode.removeChild(element);
         let index = activeProjects.indexOf(project215);
         activeProjects.splice(index, 1);
-        
+
     }
 }
 
@@ -2363,14 +2363,14 @@ let project216 = {
         dismantle = 7;
         standardOps = 0;
         memory = 0;
-        wire = wire + 20;
+        wire += 20;
         document.getElementById("transWire").innerHTML=wire;
         displayMessage("Dismantling memory");
         let element = document.getElementById("projectButton216");
         element.parentNode.removeChild(element);
         let index = activeProjects.indexOf(project216);
         activeProjects.splice(index, 1);
-        
+
     }
 }
 

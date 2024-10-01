@@ -10,7 +10,7 @@ let clipmakerLevel2 = 0;
 let clipperCost = 5;
 let unsoldClips = 0;
 let funds = 0;
-let margin = .25;
+let margin = 0.25;
 let wire = 1000;
 let wireCost = 20;
 let adCost = 100;
@@ -69,7 +69,7 @@ let wireDroneFlag = 0;
 let factoryLevel = 0;
 let factoryBoost = 1;
 let droneBoost = 1;
-let availableMatter = Math.pow(10, 24)*6000;
+let availableMatter = Math.pow(10, 24) * 6000;
 let acquiredMatter = 0;
 let processedMatter = 0;
 let harvesterLevel = 0;
@@ -84,7 +84,7 @@ let harvesterBill = 0;
 let wireDroneBill = 0;
 let factoryBill = 0;
 let probeCount = 0;
-let totalMatter = Math.pow(10, 54)*30;
+let totalMatter = Math.pow(10, 54) * 30;
 let foundMatter = availableMatter;
 let qFlag = 0;
 let qClock = 0;
@@ -165,17 +165,4 @@ let finalClips = 0;
 
 let resetFlag = 2;
 let threnodyAudio = new Audio();
-let threnodyLoadedBool = false; 
-
-
-
-
-
-
-
-
-
-
-
-
-
+let threnodyLoadedBool = false;
