@@ -212,7 +212,7 @@ function displayProjects(project) {
     span.style.fontWeight = "bold";
     newProject.appendChild(span);
 
-    let title = document.createTextNode(project.title);
+    let title = document.createTextNode(project.title+" ");
     span.appendChild(title);
 
     let cost = document.createTextNode(project.priceTag);
@@ -242,20 +242,22 @@ function longBlink(elemID) {
     function longToggleVisibility(elemID) {
         longBlinkCounter++;
 
+        let hypnoDroneTextDiv = document.getElementById("hypnoDroneText");
+
         if (longBlinkCounter > 5 && longBlinkCounter < 10) {
-            document.getElementById("hypnoDroneText").innerHTML = "Release";
+            hypnoDroneTextDiv.innerHTML = "Release";
         }
 
         if (longBlinkCounter > 30 && longBlinkCounter < 40) {
-            document.getElementById("hypnoDroneText").innerHTML = "<br /><br /><br />Release";
+            hypnoDroneTextDiv.innerHTML = "<br /><br /><br />Release";
         }
 
         if (longBlinkCounter > 45 && longBlinkCounter < 55) {
-            document.getElementById("hypnoDroneText").innerHTML = "<br />Release";
+            hypnoDroneTextDiv.innerHTML = "<br />Release";
         }
 
         if (longBlinkCounter > 55) {
-            document.getElementById("hypnoDroneText").innerHTML = "Release<br/>the<br/>Hypno<br/>Drones";
+            hypnoDroneTextDiv.innerHTML = "Release<br/>the<br/>Hypno<br/>Drones";
         }
 
         if (longBlinkCounter >= 120) {
@@ -431,7 +433,7 @@ function buttonUpdate() {
         document.getElementById("combatButtonDiv").style.display = "";
     }
 
-    if (maxFactoryLevel >= 50 || project45.flag == 0) {
+    if (maxFactoryLevel >= 50 || pClipFactories.flag == 0) {
         document.getElementById("factoryUpgradeDisplay").style.display = "none";
     } else {
         document.getElementById("factoryUpgradeDisplay").style.display = "";
@@ -1667,11 +1669,12 @@ function updatePower() {
         let cap = batteryLevel * batterySize;
 
         if (supply >= demand) {
-            xsSupply -= demand;
+            xsSupply = supply - demand;
             if (storedPower < cap) {
                 if (xsSupply > cap - storedPower) {
                     xsSupply = cap - storedPower;
                 }
+                console.log("storedPower += xsSupply, xsSupply is? : " + xsSupply);
                 storedPower += xsSupply;
             }
 
@@ -1683,7 +1686,7 @@ function updatePower() {
                 powMod += 0.0001;
             }
         } else if (supply < demand) {
-            xsDemand -= supply;
+            xsDemand = demand - supply;
             if (storedPower > 0) {
                 if (storedPower >= xsDemand) {
                     if (momentum == 1) {
@@ -1691,10 +1694,11 @@ function updatePower() {
                     }
 
                     storedPower -= xsDemand;
+                    console.log("storedPower -= xsDemand, xsDemand is? : " + xsDemand);
                 } else if (storedPower < xsDemand) {
                     xsDemand -= storedPower;
                     storedPower = 0;
-                    nuSupply -= xsDemand;
+                    nuSupply = supply - xsDemand;
                     powMod = nuSupply / demand;
                 }
             } else if (storedPower <= 0) {
@@ -1888,18 +1892,14 @@ function updateStats() {
     document.getElementById("maxOps").innerHTML = (memory * 1000).toLocaleString();
 }
 
-let incomeThen;
+// let incomeThen;
 let incomeNow;
-let trueAvgRev;
-let revTimer = 0;
-let avgSales;
-let incomeLastSecond;
-let sum;
+// let revTimer = 0;
 
 function calculateRev() {
-    incomeThen = incomeNow;
+    let incomeThen = incomeNow;
     incomeNow = income;
-    incomeLastSecond = Math.round((incomeNow - incomeThen) * 100) / 100;
+    let incomeLastSecond = Math.round((incomeNow - incomeThen) * 100) / 100;
 
     incomeTracker.push(incomeLastSecond);
 
@@ -1907,14 +1907,13 @@ function calculateRev() {
         incomeTracker.splice(0, 1);
     }
 
-    sum = 0;
+    let sum = 0;
 
     for (let i = 0; i < incomeTracker.length; i++) {
         sum = Math.round((sum + incomeTracker[i]) * 100) / 100;
-        //        console.log("sum = "+sum);
     }
 
-    trueAvgRev = sum / incomeTracker.length;
+    let trueAvgRev = sum / incomeTracker.length;
 
     let chanceOfPurchase = demand / 100;
     if (chanceOfPurchase > 1) {
@@ -1924,7 +1923,7 @@ function calculateRev() {
         chanceOfPurchase = 0;
     }
 
-    avgSales = chanceOfPurchase * (0.7 * Math.pow(demand, 1.15)) * 10;
+    let avgSales = chanceOfPurchase * (0.7 * Math.pow(demand, 1.15)) * 10;
     avgRev = chanceOfPurchase * (0.7 * Math.pow(demand, 1.15)) * margin * 10;
 
     if (demand > unsoldClips) {
@@ -2005,7 +2004,7 @@ function cheatMoney() {
 }
 
 function cheatTrust() {
-    trust += 1;
+    trust += 5;
     displayMessage("Hilary is nice. Also, Liza just cheated");
 }
 
@@ -2056,7 +2055,7 @@ function addProc() {
         displayMessage("Processor added, operations per sec increased");
     }
 
-    if (humanFlag == 0) {
+    if (humanFlag == 0 && swarmGifts > 0) {
         swarmGifts -= 1;
     }
 }
@@ -2066,7 +2065,7 @@ function addMem() {
     memory++;
     document.getElementById("memory").innerHTML = memory;
 
-    if (humanFlag == 0) {
+    if (humanFlag == 0 && swarmGifts > 0) {
         swarmGifts -= 1;
     }
 }
@@ -2149,7 +2148,7 @@ function milestoneCheck() {
         displayMessage("1,000,000 clips created in " + timeCruncher(ticks));
     }
 
-    if (milestoneFlag == 6 && project35.flag == 1) {
+    if (milestoneFlag == 6 && pReleaseHypnoDrones.flag == 1) {
         milestoneFlag += 1;
         displayMessage("Full autonomy attained in " + timeCruncher(ticks));
     }
@@ -2220,80 +2219,80 @@ function numberCruncher(number, decimals) {
     }
     let precision = decimals;
     let newNumber = number ?? 0;
-    if (number > 999999999999999999999999999999999999999999999999999) {
-        newNumber /= 1000000000000000000000000000000000000000000000000000;
-        suffix = "sexdecillion";
-    } else if (number > 999999999999999999999999999999999999999999999999) {
-        newNumber /= 1000000000000000000000000000000000000000000000000;
-        suffix = "quindecillion";
-    } else if (number > 999999999999999999999999999999999999999999999) {
-        newNumber /= 1000000000000000000000000000000000000000000000;
-        suffix = "quattuordecillion";
-    } else if (number > 999999999999999999999999999999999999999999) {
-        newNumber /= 1000000000000000000000000000000000000000000;
-        suffix = "tredecillion";
-    } else if (number > 999999999999999999999999999999999999999) {
-        newNumber /= 1000000000000000000000000000000000000000;
-        suffix = "duodecillion";
-    } else if (number > 999999999999999999999999999999999999) {
-        newNumber /= 1000000000000000000000000000000000000;
-        suffix = "undecillion";
-    } else if (number > 999999999999999999999999999999999) {
-        newNumber /= 1000000000000000000000000000000000;
-        suffix = "decillion";
-    } else if (number > 999999999999999999999999999999) {
-        newNumber /= 1000000000000000000000000000000;
-        suffix = "nonillion";
-    } else if (number > 999999999999999999999999999) {
-        newNumber /= 1000000000000000000000000000;
-        suffix = "octillion";
-    } else if (number > 999999999999999999999999) {
-        newNumber /= 1000000000000000000000000;
-        suffix = "septillion";
-    } else if (number > 999999999999999999999) {
-        newNumber /= 1000000000000000000000;
-        suffix = "sextillion";
-    } else if (number > 999999999999999999) {
-        newNumber /= 1000000000000000000;
-        suffix = "quintillion";
-    } else if (number > 999999999999999) {
-        newNumber /= 1000000000000000;
-        suffix = "quadrillion";
-    } else if (number > 999999999999) {
-        newNumber /= 1000000000000;
-        suffix = "trillion";
-    } else if (number > 999999999) {
-        newNumber /= 1000000000;
-        suffix = "billion";
-    } else if (number > 999999) {
-        newNumber /= 1000000;
-        suffix = "million";
-    } else if (number > 999) {
-        newNumber /= 1000;
-        suffix = "thousand";
-    } else if (number < 1000) {
-        precision = 0;
-    }
-    // let suffixes = [
-    //     "thousand",
-    //     "million",
-    //     "billion",
-    //     "trillion",
-    //     "quadrillion",
-    //     "quintillion",
-    //     "sextillion",
-    //     "septillion",
-    //     "octillion",
-    //     "nonillion",
-    //     "decillion",
-    //     "undecillion",
-    //     "duodecillion",
-    //     "tredecillion",
-    //     "quattuordecillion",
-    //     "quindecillion",
-    //     "sexdecillion",
-    // ];
-    // let range = Math.pow(number);
+    // if (number > 999999999999999999999999999999999999999999999999999) {
+    //     newNumber /= 1000000000000000000000000000000000000000000000000000;
+    //     suffix = "sexdecillion";
+    // } else if (number > 999999999999999999999999999999999999999999999999) {
+    //     newNumber /= 1000000000000000000000000000000000000000000000000;
+    //     suffix = "quindecillion";
+    // } else if (number > 999999999999999999999999999999999999999999999) {
+    //     newNumber /= 1000000000000000000000000000000000000000000000;
+    //     suffix = "quattuordecillion";
+    // } else if (number > 999999999999999999999999999999999999999999) {
+    //     newNumber /= 1000000000000000000000000000000000000000000;
+    //     suffix = "tredecillion";
+    // } else if (number > 999999999999999999999999999999999999999) {
+    //     newNumber /= 1000000000000000000000000000000000000000;
+    //     suffix = "duodecillion";
+    // } else if (number > 999999999999999999999999999999999999) {
+    //     newNumber /= 1000000000000000000000000000000000000;
+    //     suffix = "undecillion";
+    // } else if (number > 999999999999999999999999999999999) {
+    //     newNumber /= 1000000000000000000000000000000000;
+    //     suffix = "decillion";
+    // } else if (number > 999999999999999999999999999999) {
+    //     newNumber /= 1000000000000000000000000000000;
+    //     suffix = "nonillion";
+    // } else if (number > 999999999999999999999999999) {
+    //     newNumber /= 1000000000000000000000000000;
+    //     suffix = "octillion";
+    // } else if (number > 999999999999999999999999) {
+    //     newNumber /= 1000000000000000000000000;
+    //     suffix = "septillion";
+    // } else if (number > 999999999999999999999) {
+    //     newNumber /= 1000000000000000000000;
+    //     suffix = "sextillion";
+    // } else if (number > 999999999999999999) {
+    //     newNumber /= 1000000000000000000;
+    //     suffix = "quintillion";
+    // } else if (number > 999999999999999) {
+    //     newNumber /= 1000000000000000;
+    //     suffix = "quadrillion";
+    // } else if (number > 999999999999) {
+    //     newNumber /= 1000000000000;
+    //     suffix = "trillion";
+    // } else if (number > 999999999) {
+    //     newNumber /= 1000000000;
+    //     suffix = "billion";
+    // } else if (number > 999999) {
+    //     newNumber /= 1000000;
+    //     suffix = "million";
+    // } else if (number > 999) {
+    //     newNumber /= 1000;
+    //     suffix = "thousand";
+    // } else if (number < 1000) {
+    //     precision = 0;
+    // }
+    let suffixes = [
+        "thousand",
+        "million",
+        "billion",
+        "trillion",
+        "quadrillion",
+        "quintillion",
+        "sextillion",
+        "septillion",
+        "octillion",
+        "nonillion",
+        "decillion",
+        "undecillion",
+        "duodecillion",
+        "tredecillion",
+        "quattuordecillion",
+        "quindecillion",
+        "sexdecillion",
+    ];
+    let range = Math.log(number + 1) / 3;
     return newNumber.toFixed(precision) + " " + suffix;
 }
 
@@ -3109,7 +3108,7 @@ function refresh() {
 
     // HOT FIXES
 
-    if (project46.flag == 1) {
+    if (pSpaceExploration.flag == 1) {
         loadThrenody();
     }
 
@@ -4232,8 +4231,8 @@ function load() {
     probeLaunchLevel = loadGame.probeLaunchLevel;
     probeCost = loadGame.probeCost;
 
-    project40b.priceTag = "($" + bribe.toLocaleString() + ")";
-    project51.priceTag = "(" + qChipCost + " ops)";
+    pGoodwillToken2.priceTag = "($" + bribe.toLocaleString() + ")";
+    pPhotonicChip1.priceTag = "(" + qChipCost + " ops)";
 
     for (let i = 0; i < projects.length; i++) {
         projects[i].uses = loadProjectsUses[i];
@@ -4539,8 +4538,8 @@ function load1() {
     probeLaunchLevel = loadGame.probeLaunchLevel;
     probeCost = loadGame.probeCost;
 
-    project40b.priceTag = "($" + bribe.toLocaleString() + ")";
-    project51.priceTag = "(" + qChipCost + " ops)";
+    pGoodwillToken2.priceTag = "($" + bribe.toLocaleString() + ")";
+    pPhotonicChip1.priceTag = "(" + qChipCost + " ops)";
 
     refresh();
 }
@@ -4830,8 +4829,8 @@ function load2() {
     probeLaunchLevel = loadGame.probeLaunchLevel;
     probeCost = loadGame.probeCost;
 
-    project40b.priceTag = "($" + bribe.toLocaleString() + ")";
-    project51.priceTag = "(" + qChipCost + " ops)";
+    pGoodwillToken2.priceTag = "($" + bribe.toLocaleString() + ")";
+    pPhotonicChip1.priceTag = "(" + qChipCost + " ops)";
 
     refresh();
 }
