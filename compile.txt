@@ -1,0 +1,5 @@
+./scripts/globals.ts
+./scripts/projects.ts
+./scripts/strategy.ts
+./scripts/combat.ts
+./scripts/main.ts

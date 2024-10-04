@@ -1,7 +1,16 @@
 // PROJECTS -------------------------------------------------------
 
 class Project {
-    constructor(id, title, priceTag, description, uses, flag, trigger, cost, effect) {
+    id: string;
+    title: string;
+    priceTag: string;
+    description: string;
+    uses: number;
+    flag: number;
+    trigger: () => boolean;
+    cost: () => boolean;
+    effect: () => void;
+    constructor(id: string, title: string, priceTag: string, description: string, uses: number, flag: number, trigger: () => boolean, cost: () => boolean, effect: () => void) {
         this.id = id;
         this.title = title;
         this.priceTag = priceTag;
@@ -14,8 +23,8 @@ class Project {
     }
 }
 
-let projects = [];
-let activeProjects = [];
+let projects : Project[] = [];
+let activeProjects : Project[] = [];
 
 let pImproveAutoclippers1 = new Project("projectButton1",
     "Improved AutoClippers", "(750 ops)", "Increases AutoClipper performance 25%", 1, 1,
@@ -842,7 +851,7 @@ let pReleaseHypnoDrones = {
 
         hypnoDroneEvent();
 
-        document.getElementById("transWire").innerHTML = wire;
+        document.getElementById("transWire").innerHTML = wire.toLocaleString();
 
         let element = document.getElementById("projectButton35");
         element.parentNode.removeChild(element);
@@ -1045,7 +1054,7 @@ let pHostileTakeover = {
         displayMessage("Global Fasteners acquired, public demand increased x5");
         demandBoost = demandBoost * 5;
         trust += 1;
-        document.getElementById("demand").innerHTML = demand;
+        document.getElementById("demand").innerHTML = demand.toLocaleString();
         funds -= 1000000;
         let element = document.getElementById("projectButton37");
         element.parentNode.removeChild(element);
@@ -1073,7 +1082,7 @@ let pFullMonopoly = {
         pFullMonopoly.flag = 1;
         displayMessage("Full market monopoly achieved, public demand increased x10");
         demandBoost = demandBoost * 10;
-        document.getElementById("demand").innerHTML = demand;
+        document.getElementById("demand").innerHTML = demand.toLocaleString();
         funds -= 10000000;
         trust += 1;
         yomi = yomi - 1000;
@@ -1130,7 +1139,7 @@ let pHarvesterDrones = {
     effect: function () {
         pHarvesterDrones.flag = 1;
         harvesterFlag = 1;
-        document.getElementById("harvesterCostDisplay").innerHTML = numberCruncher(harvesterCost);
+        document.getElementById("harvesterCostDisplay").innerHTML = numberCruncher(harvesterCost).toLocaleString();
         standardOps = standardOps - 25000;
         displayMessage("Harvester Drone facilities online");
         let element = document.getElementById("projectButton43");
@@ -1380,7 +1389,7 @@ let psA100 = {
         let stratList = document.getElementById("stratPicker");
         let el = document.createElement("option");
         el.textContent = "A100";
-        el.value = 1;
+        el.value = "1";
         stratList.appendChild(el);
         let element = document.getElementById("projectButton60");
         element.parentNode.removeChild(element);
@@ -1415,7 +1424,7 @@ let psB100 = {
         let stratList = document.getElementById("stratPicker");
         let el = document.createElement("option");
         el.textContent = "B100";
-        el.value = 2;
+        el.value = "2";
         stratList.appendChild(el);
         let element = document.getElementById("projectButton61");
         element.parentNode.removeChild(element);
@@ -1450,7 +1459,7 @@ let psGreedy = {
         let stratList = document.getElementById("stratPicker");
         let el = document.createElement("option");
         el.textContent = "GREEDY";
-        el.value = 3;
+        el.value = "3";
         stratList.appendChild(el);
         let element = document.getElementById("projectButton62");
         element.parentNode.removeChild(element);
@@ -1485,7 +1494,7 @@ let psGenerous = {
         let stratList = document.getElementById("stratPicker");
         let el = document.createElement("option");
         el.textContent = "GENEROUS";
-        el.value = 4;
+        el.value = "4";
         stratList.appendChild(el);
         let element = document.getElementById("projectButton63");
         element.parentNode.removeChild(element);
@@ -1520,7 +1529,7 @@ let psMinimax = {
         let stratList = document.getElementById("stratPicker");
         let el = document.createElement("option");
         el.textContent = "MINIMAX";
-        el.value = 5;
+        el.value = "5";
         stratList.appendChild(el);
         let element = document.getElementById("projectButton64");
         element.parentNode.removeChild(element);
@@ -1555,7 +1564,7 @@ let psTitForTat = {
         let stratList = document.getElementById("stratPicker");
         let el = document.createElement("option");
         el.textContent = "TIT FOR TAT";
-        el.value = 6;
+        el.value = "6";
         stratList.appendChild(el);
         let element = document.getElementById("projectButton65");
         element.parentNode.removeChild(element);
@@ -1590,7 +1599,7 @@ let psBeatLast = {
         let stratList = document.getElementById("stratPicker");
         let el = document.createElement("option");
         el.textContent = "BEAT LAST";
-        el.value = 7;
+        el.value = "7";
         stratList.appendChild(el);
         let element = document.getElementById("projectButton66");
         element.parentNode.removeChild(element);
@@ -2035,7 +2044,7 @@ let project130 = {
         let index = activeProjects.indexOf(project130);
         activeProjects.splice(index, 1);
     },
-};
+} as Project;
 
 projects.push(project130);
 
@@ -2593,7 +2602,7 @@ let project213 = {
         dismantle = 4;
         standardOps = standardOps - 100000;
         wire += 50;
-        document.getElementById("transWire").innerHTML = wire;
+        document.getElementById("transWire").innerHTML = wire.toLocaleString();
         displayMessage("Dismantling strategy engine");
         let element = document.getElementById("projectButton213");
         element.parentNode.removeChild(element);
@@ -2653,7 +2662,7 @@ let project215 = {
         processors = 0;
         project216.priceTag = "(" + standardOps.toLocaleString() + " ops)";
         wire += 20;
-        document.getElementById("transWire").innerHTML = wire;
+        document.getElementById("transWire").innerHTML = wire.toLocaleString();
         displayMessage("Dismantling processors");
         let element = document.getElementById("projectButton215");
         element.parentNode.removeChild(element);
@@ -2683,7 +2692,7 @@ let project216 = {
         standardOps = 0;
         memory = 0;
         wire += 20;
-        document.getElementById("transWire").innerHTML = wire;
+        document.getElementById("transWire").innerHTML = wire.toLocaleString();
         displayMessage("Dismantling memory");
         let element = document.getElementById("projectButton216");
         element.parentNode.removeChild(element);
@@ -2766,11 +2775,11 @@ let project219 = {
         creativity = creativity - 100000;
         project219.flag = 1;
         memory = 0;
-        document.getElementById("memory").innerHTML = memory;
+        document.getElementById("memory").innerHTML = memory.toLocaleString();
         processors = 0;
         creativitySpeed = 0;
         project219.uses = project219.uses + 1;
-        document.getElementById("processors").innerHTML = processors;
+        document.getElementById("processors").innerHTML = processors.toLocaleString();
         displayMessage("Trust now available for re-allocation");
         let element = document.getElementById("projectButton219");
         element.parentNode.removeChild(element);

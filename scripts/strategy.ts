@@ -177,13 +177,15 @@ let stratTitfortat = {
     currentScore: 0,
     currentPos: 1,
     pickMove: function () {
-        if (this.currentPos == 1) {
-            w = vMovePrev;
-            return w;
-        } else {
-            w = hMovePrev;
-            return w;
-        }
+        // WARNING: what the fuck. why is w just an undeclared variable
+        // if (this.currentPos == 1) {
+        //     w = vMovePrev;
+        //     return w;
+        // } else {
+        //     w = hMovePrev;
+        //     return w;
+        // }
+        return vMovePrev;
     },
 };
 
@@ -205,7 +207,7 @@ allStrats.push(stratBeatlast);
 let hStrat = strats[0];
 let vStrat = strats[0];
 
-document.getElementById("btnRunTournament").disabled = true;
+(document.getElementById("btnRunTournament") as HTMLButtonElement).disabled = true;
 
 function findBiggestPayoff() {
     if (aa >= ab && aa >= ba && aa >= bb) {
@@ -253,7 +255,8 @@ function whatBeatsLast(myPos) {
     }
 }
 
-function pickStrats(roundNum) {
+function pickStrats(roundNum: number) {
+    let h: number, v: number;
     if (roundNum < strats.length) {
         h = 0;
         v = roundNum;
@@ -294,14 +297,14 @@ function generateGrid() {
     document.getElementById("hLabela").innerHTML = choiceANames[x];
     document.getElementById("hLabelb").innerHTML = choiceBNames[x];
 
-    document.getElementById("aaPayoffH").innerHTML = payoffGrid.valueAA;
-    document.getElementById("aaPayoffV").innerHTML = payoffGrid.valueAA;
-    document.getElementById("abPayoffH").innerHTML = payoffGrid.valueAB;
-    document.getElementById("abPayoffV").innerHTML = payoffGrid.valueBA;
-    document.getElementById("baPayoffH").innerHTML = payoffGrid.valueBA;
-    document.getElementById("baPayoffV").innerHTML = payoffGrid.valueAB;
-    document.getElementById("bbPayoffH").innerHTML = payoffGrid.valueBB;
-    document.getElementById("bbPayoffV").innerHTML = payoffGrid.valueBB;
+    document.getElementById("aaPayoffH").innerHTML = payoffGrid.valueAA.toLocaleString();
+    document.getElementById("aaPayoffV").innerHTML = payoffGrid.valueAA.toLocaleString();
+    document.getElementById("abPayoffH").innerHTML = payoffGrid.valueAB.toLocaleString();
+    document.getElementById("abPayoffV").innerHTML = payoffGrid.valueBA.toLocaleString();
+    document.getElementById("baPayoffH").innerHTML = payoffGrid.valueBA.toLocaleString();
+    document.getElementById("baPayoffV").innerHTML = payoffGrid.valueAB.toLocaleString();
+    document.getElementById("bbPayoffH").innerHTML = payoffGrid.valueBB.toLocaleString();
+    document.getElementById("bbPayoffV").innerHTML = payoffGrid.valueBB.toLocaleString();
 }
 
 function toggleAutoTourney() {
@@ -332,7 +335,7 @@ function newTourney() {
     tourneyLvl++;
     generateGrid();
 
-    document.getElementById("btnRunTournament").disabled = false;
+    (document.getElementById("btnRunTournament") as HTMLButtonElement).disabled = false;
 
     document.getElementById("vertStrat").innerHTML = "&nbsp";
     document.getElementById("horizStrat").innerHTML = "&nbsp";
@@ -342,7 +345,7 @@ function newTourney() {
 }
 
 function runTourney() {
-    document.getElementById("btnRunTournament").disabled = true;
+    (document.getElementById("btnRunTournament") as HTMLButtonElement).disabled = true;
     if (currentRound < rounds) {
         round(currentRound);
     } else {
@@ -367,7 +370,7 @@ function pickWinner() {
         temp[i] = strats[i];
     }
 
-    for (n = 0; n < strats.length; n++) {
+    for (let n = 0; n < strats.length; n++) {
         tempHigh = 0;
         tempWinnerPtr = 0;
 
@@ -399,7 +402,7 @@ function calculatePlaceScore() {
 
     // 1. Find top non-winning score
 
-    for (i = 1; i < results.length; i++) {
+    for (let i = 1; i < results.length; i++) {
         if (results[i].currentScore < results[i - 1].currentScore) {
             placeScore = results[i].currentScore;
             break;
@@ -412,7 +415,7 @@ function calculateShowScore() {
 
     // 1. Find top non-placing score
 
-    for (i = 1; i < results.length; i++) {
+    for (let i = 1; i < results.length; i++) {
         if (results[i].currentScore < placeScore) {
             showScore = results[i].currentScore;
             break;
@@ -531,30 +534,56 @@ function revealResults() {
 }
 
 function calcPayoff(hm, vm) {
+    // WARNING: h and v were not declared. hmmm
+    // if (hm == 1 && vm == 1) {
+    //     let w = document.getElementById("payoffCellAA");
+    //     w.style.backgroundColor = "LightGrey";
+
+    //     strats[h].currentScore += payoffGrid.valueAA;
+    //     strats[v].currentScore += payoffGrid.valueAA;
+    // } else if (hm == 1 && vm == 2) {
+    //     let w = document.getElementById("payoffCellAB");
+    //     w.style.backgroundColor = "LightGrey";
+
+    //     strats[h].currentScore += payoffGrid.valueAB;
+    //     strats[v].currentScore += payoffGrid.valueBA;
+    // } else if (hm == 2 && vm == 1) {
+    //     let w = document.getElementById("payoffCellBA");
+    //     w.style.backgroundColor = "LightGrey";
+
+    //     strats[h].currentScore += payoffGrid.valueBA;
+    //     strats[v].currentScore += payoffGrid.valueAB;
+    // } else if (hm == 2 && vm == 2) {
+    //     let w = document.getElementById("payoffCellBB");
+    //     w.style.backgroundColor = "LightGrey";
+
+    //     strats[h].currentScore += payoffGrid.valueBB;
+    //     strats[v].currentScore += payoffGrid.valueBB;
+    // }
     if (hm == 1 && vm == 1) {
         let w = document.getElementById("payoffCellAA");
         w.style.backgroundColor = "LightGrey";
 
-        strats[h].currentScore += payoffGrid.valueAA;
-        strats[v].currentScore += payoffGrid.valueAA;
+        strats[hm].currentScore += payoffGrid.valueAA;
+        strats[vm].currentScore += payoffGrid.valueAA;
     } else if (hm == 1 && vm == 2) {
         let w = document.getElementById("payoffCellAB");
         w.style.backgroundColor = "LightGrey";
 
-        strats[h].currentScore += payoffGrid.valueAB;
-        strats[v].currentScore += payoffGrid.valueBA;
+        strats[hm].currentScore += payoffGrid.valueAB;
+        strats[vm].currentScore += payoffGrid.valueBA;
     } else if (hm == 2 && vm == 1) {
         let w = document.getElementById("payoffCellBA");
         w.style.backgroundColor = "LightGrey";
 
-        strats[h].currentScore += payoffGrid.valueBA;
-        strats[v].currentScore += payoffGrid.valueAB;
+        strats[hm].currentScore += payoffGrid.valueBA;
+        strats[vm].currentScore += payoffGrid.valueAB;
     } else if (hm == 2 && vm == 2) {
         let w = document.getElementById("payoffCellBB");
         w.style.backgroundColor = "LightGrey";
 
-        strats[h].currentScore += payoffGrid.valueBB;
-        strats[v].currentScore += payoffGrid.valueBB;
+        strats[hm].currentScore += payoffGrid.valueBB;
+        strats[vm].currentScore += payoffGrid.valueBB;
     }
 }
 
@@ -612,5 +641,6 @@ function round(roundNum) {
 }
 
 window.setInterval(function () {
-    pick = document.getElementById("stratPicker").value;
+    // WARNING: parseInt might be wrong. idk
+    pick = parseInt((document.getElementById("stratPicker") as HTMLInputElement).value);
 }, 100);

@@ -14,9 +14,9 @@ let battleLEFTCOLOR = "#ffffff";
 let battleRIGHTCOLOR = "#000000";
 let battleEXPLODECOLOR = "#ffffff";
 
-let ships = new Array();
+let ships : Ship[] = new Array();
 let numShips = 0;
-let grid = new Array(battleGRID_HEIGHT);
+let grid : Cell[][] = new Array(battleGRID_HEIGHT);
 let numLeftShips = 0;
 let numRightShips = 0;
 
@@ -26,7 +26,7 @@ let attackSpeed = 0.2;
 let battleSpeed = 0.2;
 let attackSpeedFlag = 0;
 let attackSpeedMod = 0.1;
-let battles = [];
+let battles : Battle[] = [];
 let battleID = 0;
 let battleName = "foo";
 let battleNameFlag = 0;
@@ -169,7 +169,7 @@ let battleNames = [
     "Zaragoza",
 ];
 
-let battleNumbers = [];
+let battleNumbers : number[] = [];
 
 for (let i = 0; i < battleNames.length; i++) {
     battleNumbers.push(1);
@@ -372,23 +372,24 @@ function updateBattleDisplay(battle){
 //CANVAS BATTLE DISPLAY
 
 class Battle {
+    initialize: () => void;
     constructor() {
-        let canvas;
-        let context;
-        let interval;
-        let sign;
+        let canvas: HTMLCanvasElement;
+        let context: CanvasRenderingContext2D;
+        let interval: any;
+        let sign: any;
 
         battleRestart();
 
         this.initialize = function () {
-            canvas = document.getElementById("canvas");
+            canvas = document.getElementById("canvas") as HTMLCanvasElement;
 
             context = canvas.getContext("2d");
 
             canvas.width = battleWIDTH;
             canvas.height = battleHEIGHT;
 
-            let interval = setInterval(Update, 16);
+            setInterval(Update, 16);
 
             battleRestart();
         };
@@ -414,7 +415,7 @@ class Battle {
                             }
                             document.getElementById("battleResult").innerHTML = "DEFEAT";
                             document.getElementById("battleResultSign").innerHTML = "-";
-                            document.getElementById("honorAmount").innerHTML = battleLEFTSHIPS;
+                            document.getElementById("honorAmount").innerHTML = battleLEFTSHIPS.toLocaleString();
                             document.getElementById("honorDisplay").innerHTML = Math.round(honor).toLocaleString();
                             threnodyTitle = battleName;
                         }
@@ -422,7 +423,7 @@ class Battle {
                         if (numRightShips == 0) {
                             if (honorCount == 0) {
                                 honorReward = battleRIGHTSHIPS + bonusHonor;
-                                document.getElementById("honorAmount").innerHTML = honorReward;
+                                document.getElementById("honorAmount").innerHTML = honorReward.toLocaleString();
                                 honor += honorReward;
 
                                 if (pGlory.flag == 1) {
@@ -474,7 +475,7 @@ class Battle {
             grid = new Array(battleGRID_HEIGHT);
 
             //reset the grid
-            let row, col;
+            let row: number, col: number;
             for (row = 0; row < battleGRID_HEIGHT; row++) {
                 grid[row] = new Array();
                 for (col = 0; col < battleGRID_WIDTH; col++) {
@@ -505,8 +506,8 @@ class Battle {
         let UpdateGrid = function () {
             //First clear grid out
 
-            let p;
-            let row, col;
+            let p: Ship;
+            let row: number, col: number;
             for (row = 0; row < battleGRID_HEIGHT; row++) {
                 for (col = 0; col < battleGRID_WIDTH; col++) {
                     grid[row][col].ships.length = 0;
@@ -548,10 +549,10 @@ class Battle {
             //        }
             let dX = drifterCombat;
 
-            let p;
-            let row, col, i;
-            let numLeftTeam, numRightTeam;
-            let diceRoll;
+            let p: Ship;
+            let row: number, col: number, i: any;
+            let numLeftTeam: number, numRightTeam: number;
+            let diceRoll: number;
             let ooda = 0;
 
             if (attackSpeedFlag == 1) {
@@ -619,7 +620,7 @@ class Battle {
         };
 
         let MoveShips = function () {
-            let i, p;
+            let p: Ship;
             let centroid = FindCentroid();
 
             for (let i = 0; i < numShips; i++) {
@@ -651,7 +652,6 @@ class Battle {
         let FindCentroid = function () {
             //find the statistical center of all the ships
 
-            let i, p;
             let centroid = { x: 0, y: 0 };
             let shipsAlive = 0;
 
@@ -671,14 +671,14 @@ class Battle {
             return centroid;
         };
 
-        let MoveSingleShip = function (p, centroid) {
+        let MoveSingleShip = function (p: Ship, centroid: { x: any; y: any; }) {
             //accelerate to group centroid
             p.vx += (centroid.x - p.x) * 0.001;
             p.vy += (centroid.y - p.y) * 0.001;
 
             //accelerate to enemy ships in adjacent grid cells
-            let row, col, i;
-            let othership;
+            let row: number, col: number;
+            let othership: Ship;
             let teammatesConsidered = 0;
             for (row = Math.max(p.gy - 1, 0); row < Math.min(p.gy + 2, battleGRID_HEIGHT); row++) {
                 for (col = Math.max(p.gx - 1, 0); col < Math.min(p.gx + 2, battleGRID_WIDTH); col++) {
@@ -755,17 +755,30 @@ class Battle {
 
 //Grid cells for quicker grouping
 class Cell {
+    ships: any[];
+    numShips: number;
+    add: (ship: any) => void;
     constructor() {
         this.ships = new Array();
         this.numShips = 0;
-        this.add = function (ship) {
+        this.add = function (ship: any) {
             this.ships[this.numShips++] = ship;
         };
     }
 }
 
 class Ship {
-    constructor(team) {
+    alive: boolean;
+    color: any;
+    team: number;
+    framesDead: number;
+    gx: number;
+    gy: number;
+    x: number;
+    y: number;
+    vx: number;
+    vy: number;
+    constructor(team: number) {
         this.alive = true;
         this.color;
         this.team = team;
@@ -847,7 +860,8 @@ function createBattle() {
         battleRIGHTSHIPS = 200;
     }
 
-    Battle();
+    // WARNING: this was just "Battle" before, might need to be fixed?
+    new Battle();
 
     battleName = "Drifter Attack " + newBattle.id;
 
