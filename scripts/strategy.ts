@@ -340,8 +340,7 @@ function newTourney() {
     document.getElementById("vertStrat").innerHTML = "&nbsp";
     document.getElementById("horizStrat").innerHTML = "&nbsp";
 
-    document.getElementById("tourneyDisplay").innerHTML =
-        "Pick strategy, run tournament, gain yomi";
+    document.getElementById("tourneyDisplay").innerHTML = "Pick strategy, run tournament, gain yomi";
 }
 
 function runTourney() {
@@ -427,8 +426,7 @@ function declareWinner() {
     if (pick < 10) {
         tourneyReport("TOURNAMENT RESULTS (roll over for payoff grid)");
         yomi += strats[pick].currentScore * yomiBoost;
-        document.getElementById("yomiDisplay").innerHTML =
-            yomi.toLocaleString();
+        document.getElementById("yomiDisplay").innerHTML = yomi.toLocaleString();
 
         if (milestoneFlag < 15) {
             displayMessage(
@@ -440,43 +438,25 @@ function declareWinner() {
             );
         }
 
-        if (
-            project128.flag == 1 &&
-            strats[winnerPtr].currentScore == strats[pick].currentScore
-        ) {
+        if (project128.flag == 1 && strats[winnerPtr].currentScore == strats[pick].currentScore) {
             yomi += 20000;
 
             if (milestoneFlag < 15) {
-                displayMessage(
-                    "Selected strategy won the tournament (or tied for first). +20,000 yomi"
-                );
+                displayMessage("Selected strategy won the tournament (or tied for first). +20,000 yomi");
             }
-            document.getElementById("yomiDisplay").innerHTML =
-                yomi.toLocaleString();
-        } else if (
-            project128.flag == 1 &&
-            placeScore == strats[pick].currentScore
-        ) {
+            document.getElementById("yomiDisplay").innerHTML = yomi.toLocaleString();
+        } else if (project128.flag == 1 && placeScore == strats[pick].currentScore) {
             yomi += 15000;
             if (milestoneFlag < 15) {
-                displayMessage(
-                    "Selected strategy finished in (or tied for) second place. +15,000 yomi"
-                );
+                displayMessage("Selected strategy finished in (or tied for) second place. +15,000 yomi");
             }
-            document.getElementById("yomiDisplay").innerHTML =
-                yomi.toLocaleString();
-        } else if (
-            project128.flag == 1 &&
-            showScore == strats[pick].currentScore
-        ) {
+            document.getElementById("yomiDisplay").innerHTML = yomi.toLocaleString();
+        } else if (project128.flag == 1 && showScore == strats[pick].currentScore) {
             yomi += 10000;
             if (milestoneFlag < 15) {
-                displayMessage(
-                    "Selected strategy finished in (or tied for) third place. +10,000 yomi"
-                );
+                displayMessage("Selected strategy finished in (or tied for) third place. +10,000 yomi");
             }
-            document.getElementById("yomiDisplay").innerHTML =
-                yomi.toLocaleString();
+            document.getElementById("yomiDisplay").innerHTML = yomi.toLocaleString();
         } else {
             tourneyReport("TOURNAMENT RESULTS (roll over for grid)");
         }
@@ -488,16 +468,13 @@ function declareWinner() {
 
 function populateTourneyReport() {
     for (let i = 0; i < results.length; i++) {
-        document.getElementById("results" + i).innerHTML =
-            i + 1 + ". " + results[i].name + ": " + results[i].currentScore;
+        document.getElementById("results" + i).innerHTML = i + 1 + ". " + results[i].name + ": " + results[i].currentScore;
 
         if (pick < 10) {
             if (results[i].name == strats[pick].name) {
-                document.getElementById("results" + i).style.fontWeight =
-                    "bold";
+                document.getElementById("results" + i).style.fontWeight = "bold";
             } else {
-                document.getElementById("results" + i).style.fontWeight =
-                    "normal";
+                document.getElementById("results" + i).style.fontWeight = "normal";
             }
         }
     }
@@ -521,8 +498,7 @@ function revealGrid() {
     if (resultsFlag == 1) {
         resultsTimer = 0;
         document.getElementById("tournamentTable").style.display = "";
-        document.getElementById("tournamentResultsTable").style.display =
-            "none";
+        document.getElementById("tournamentResultsTable").style.display = "none";
     }
 }
 

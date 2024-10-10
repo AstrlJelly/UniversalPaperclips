@@ -2,4 +2,5 @@
 ./scripts/projects.ts
 ./scripts/strategy.ts
 ./scripts/combat.ts
+./scripts/persistence.ts
 ./scripts/main.ts

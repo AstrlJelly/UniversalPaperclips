@@ -10,7 +10,17 @@ class Project {
     trigger: () => boolean;
     cost: () => boolean;
     effect: () => void;
-    constructor(id: string, title: string, priceTag: string, description: string, uses: number, flag: number, trigger: () => boolean, cost: () => boolean, effect: () => void) {
+    constructor(
+        id: string,
+        title: string,
+        priceTag: string,
+        description: string,
+        uses: number,
+        flag: number,
+        trigger: () => boolean,
+        cost: () => boolean,
+        effect: () => void
+    ) {
         this.id = id;
         this.title = title;
         this.priceTag = priceTag;
@@ -23,14 +33,20 @@ class Project {
     }
 }
 
-let projects : Project[] = [];
-let activeProjects : Project[] = [];
+let projects: Project[] = [];
+let activeProjects: Project[] = [];
 
-let pImproveAutoclippers1 = new Project("projectButton1",
-    "Improved AutoClippers", "(750 ops)", "Increases AutoClipper performance 25%", 1, 1,
+let pImproveAutoclippers1 = new Project(
+    "projectButton1",
+    "Improved AutoClippers",
+    "(750 ops)",
+    "Increases AutoClipper performance 25%",
+    1,
+    1,
     () => clipmakerLevel >= 1, // trigger
-    () => operations >= 750,   // cost
-    function () { // effect
+    () => operations >= 750, // cost
+    function () {
+        // effect
         pImproveAutoclippers1.flag = 1;
         displayMessage("AutoClippper performance boosted by 25%");
         standardOps -= 750;
@@ -40,7 +56,7 @@ let pImproveAutoclippers1 = new Project("projectButton1",
         element.parentNode.removeChild(element);
         let index = activeProjects.indexOf(pImproveAutoclippers1);
         activeProjects.splice(index, 1);
-    },
+    }
 );
 
 projects.push(pImproveAutoclippers1);

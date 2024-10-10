@@ -14,9 +14,9 @@ let battleLEFTCOLOR = "#ffffff";
 let battleRIGHTCOLOR = "#000000";
 let battleEXPLODECOLOR = "#ffffff";
 
-let ships : Ship[] = new Array();
+let ships: Ship[] = new Array();
 let numShips = 0;
-let grid : Cell[][] = new Array(battleGRID_HEIGHT);
+let grid: Cell[][] = new Array(battleGRID_HEIGHT);
 let numLeftShips = 0;
 let numRightShips = 0;
 
@@ -26,7 +26,7 @@ let attackSpeed = 0.2;
 let battleSpeed = 0.2;
 let attackSpeedFlag = 0;
 let attackSpeedMod = 0.1;
-let battles : Battle[] = [];
+let battles = [];
 let battleID = 0;
 let battleName = "foo";
 let battleNameFlag = 0;
@@ -169,7 +169,7 @@ let battleNames = [
     "Zaragoza",
 ];
 
-let battleNumbers : number[] = [];
+let battleNumbers: number[] = [];
 
 for (let i = 0; i < battleNames.length; i++) {
     battleNumbers.push(1);
@@ -182,193 +182,6 @@ function generateBattleName() {
     return name;
 }
 
-/*
-
-function battleWrite(newBattle){
-
-    let element = document.getElementById("battleReportsDiv");
-    let reference = document.getElementById("battleListTop");
-
-    let newBattleReport = document.createElement("div");
-    newBattleReport.setAttribute("id", "battleReport"+newBattle.id);
-
-    let battleNameP = document.createElement("p");
-    battleNameP.setAttribute("class", "clean");
-
-    if (battleNameFlag == 0){
-        battleName = document.createTextNode("Battle "+newBattle.id);
-
-        }
-
-    if (battleNameFlag == 1){
-        battleName = document.createTextNode(generateBattleName());
-        }
-
-    battleNameP.appendChild(battleName);
-
-    newBattleReport.appendChild(battleNameP);
-
-    let battleDetailsP = document.createElement("p");
-    battleDetailsP.setAttribute("class", "clean");
-
-    let clipsLabelSpan = document.createElement("span");
-    clipsLabelSpan.style.fontWeight = "bold";
-
-    let clipsLabel = document.createTextNode("Clips: ");
-    clipsLabelSpan.appendChild(clipsLabel);
-
-    battleDetailsP.appendChild(clipsLabelSpan);
-
-    let clipProbeCountSpan = document.createElement("span");
-    clipProbeCountSpan.setAttribute("id", "battle"+newBattle.id+"clipCount")
-    let clipProbeCount = document.createTextNode(numberCruncher(newBattle.clipProbes));
-    clipProbeCountSpan.appendChild(clipProbeCount);
-    battleDetailsP.appendChild(clipProbeCountSpan);
-
-    let driftersLabelSpan = document.createElement("span");
-    driftersLabelSpan.style.fontWeight = "bold";
-
-    let driftersLabel = document.createTextNode(" Drifters: ");
-    driftersLabelSpan.appendChild(driftersLabel);
-
-    battleDetailsP.appendChild(driftersLabelSpan);
-
-    let drifterProbeCountSpan = document.createElement("span");
-    drifterProbeCountSpan.setAttribute("id", "battle"+newBattle.id+"drifterCount")
-    let drifterProbeCount = document.createTextNode(numberCruncher(newBattle.drifterProbes));
-    drifterProbeCountSpan.appendChild(drifterProbeCount);
-    battleDetailsP.appendChild(drifterProbeCountSpan);
-
-    newBattleReport.appendChild(battleDetailsP);
-
-    let territoryP = document.createElement("p");
-    territoryP.setAttribute("class", "clean");
-    let t = (newBattle.territory/availableMatter);
-    let territoryDisplay = document.createTextNode("Territory at stake: "+Math.ceil(t*100)+"% of available matter");
-    territoryP.appendChild(territoryDisplay);
-
-    newBattleReport.appendChild(territoryP);
-
-    let line = document.createElement("hr");
-    newBattleReport.appendChild(line);
-
-    reference.insertBefore(newBattleReport, reference.childNodes[0]);
-
-    }
-
-function updateBattles(){
-
-    let combatEffectiveness = probeCombatBaseRate;
-
-    if (battleNameFlag == 1) {
-        combatEffectiveness = combatEffectiveness*2
-    }
-
-    if (attackSpeedFlag == 1){
-        battleSpeed = attackSpeed * .85;
-        if (battleSpeed > .99){
-            battleSpeed = .99;
-        }
-    }
-
-    for(let i = 0; i < battles.length; i++){
-        r = Math.random();
-        if (r>=battleSpeed) {
-            let clipCasualties = battles[i].drifterProbes * drifterCombat * (1-battleSpeed);
-                if (clipCasualties>battles[i].clipProbes){
-                    clipCasualties=battles[i].clipProbes;
-                    }
-
-            battles[i].clipProbes -= clipCasualties;
-            probeCount -= clipCasualties;
-            probesLostCombat += clipCasualties;
-            document.getElementById('probesLostCombatDisplay').innerHTML = numberCruncher(probesLostCombat);
-
-//            document.getElementById('battle'+battles[i].id+"clipCount").innerHTML = numberCruncher(battles[i].clipProbes);
-
-            } else {
-            let drifterCasualties = battles[i].clipProbes * Math.pow(probeCombat, 1.7) * combatEffectiveness;
-                if (drifterCasualties>battles[i].drifterProbes){
-                    drifterCasualties=battles[i].drifterProbes;
-                    }
-
-                battles[i].drifterProbes -= drifterCasualties;
-                drifterCount -= drifterCasualties;
-
-//                document.getElementById('battle'+battles[i].id+"drifterCount").innerHTML = numberCruncher(battles[i].drifterProbes);
-            }
-
-        if (battles[i].drifterProbes < 1){
-            battles[i].victory = true;
-        }
-
-        if (battles[i].clipProbes < 1 && battles[i].victory == false){
-            battles[i].loss = true;
-        }
-
-        if (battles[i].loss == true && battles[i].whiteFlag == 0){
-            availableMatter -= battles[i].territory;
-            battles[i].whiteFlag = 1;
-        }
-
-        if (battles[i].loss == true){
-
-//            document.getElementById("battleReport"+battles[i].id).style.backgroundColor = "LightGrey";
-
-            battles[i].reportCount++;
-            if (battles[i].reportCount > outcomeTimer){
-                battles[i].garbageFlag = 1;
-            }
-        }
-
-        if (battles[i].victory == true){
-            battles[i].reportCount++;
-            if (battles[i].reportCount > outcomeTimer){
-                battles[i].garbageFlag = 1;
-            }
-        }
-    }
-}
-
-function battleCleanUp(){
-    for(let i = battles.length-1; i >= 0; i--){
-        if (battles[i].garbageFlag == 1){
-            let element = document.getElementById('battleReport'+battles[i].id);
-            element.parentNode.removeChild(element);
-            battles.splice(i,1);
-        }
-    }
-
-}
-
-
-
-function updateBattleDisplay(battle){
-
-
-
- let element = document.getElementById("battleListTop");
-
-    let newBattle = document.createElement("div");
-    newBattle.setAttribute("id", battle.id);
-    element.appendChild(newBattle, element.firstChild);
-
-    let span = document.createElement("span");
-    span.setAttribute("class", "clean");
-    span.style.fontWeight = "bold";
-    newBattle.appendChild(span);
-
-    let hed = document.createTextNode("Combatants");
-    span.appendChild(hed);
-
-    let clipsCount = document.createElement("span");
-    clipsCount = battle.clipProbes;
-    element.appendChild(span);
-
-}
-
-*/
-
 //CANVAS BATTLE DISPLAY
 
 class Battle {
@@ -376,8 +189,6 @@ class Battle {
     constructor() {
         let canvas: HTMLCanvasElement;
         let context: CanvasRenderingContext2D;
-        let interval: any;
-        let sign: any;
 
         battleRestart();
 
@@ -475,10 +286,9 @@ class Battle {
             grid = new Array(battleGRID_HEIGHT);
 
             //reset the grid
-            let row: number, col: number;
-            for (row = 0; row < battleGRID_HEIGHT; row++) {
+            for (let row = 0; row < battleGRID_HEIGHT; row++) {
                 grid[row] = new Array();
-                for (col = 0; col < battleGRID_WIDTH; col++) {
+                for (let col = 0; col < battleGRID_WIDTH; col++) {
                     grid[row][col] = new Cell();
                 }
             }
@@ -507,9 +317,8 @@ class Battle {
             //First clear grid out
 
             let p: Ship;
-            let row: number, col: number;
-            for (row = 0; row < battleGRID_HEIGHT; row++) {
-                for (col = 0; col < battleGRID_WIDTH; col++) {
+            for (let row = 0; row < battleGRID_HEIGHT; row++) {
+                for (let col = 0; col < battleGRID_WIDTH; col++) {
                     grid[row][col].ships.length = 0;
                     grid[row][col].numShips = 0;
                 }
@@ -550,7 +359,6 @@ class Battle {
             let dX = drifterCombat;
 
             let p: Ship;
-            let row: number, col: number, i: any;
             let numLeftTeam: number, numRightTeam: number;
             let diceRoll: number;
             let ooda = 0;
@@ -559,8 +367,8 @@ class Battle {
                 ooda = probeSpeed * 0.2;
             }
 
-            for (row = 0; row < battleGRID_HEIGHT; row++) {
-                for (col = 0; col < battleGRID_WIDTH; col++) {
+            for (let row = 0; row < battleGRID_HEIGHT; row++) {
+                for (let col = 0; col < battleGRID_WIDTH; col++) {
                     //First Check if there are enough ships in this cell to do combat
                     if (grid[row][col].numShips < 2) continue;
 
@@ -671,17 +479,16 @@ class Battle {
             return centroid;
         };
 
-        let MoveSingleShip = function (p: Ship, centroid: { x: any; y: any; }) {
+        let MoveSingleShip = function (p: Ship, centroid: { x: any; y: any }) {
             //accelerate to group centroid
             p.vx += (centroid.x - p.x) * 0.001;
             p.vy += (centroid.y - p.y) * 0.001;
 
             //accelerate to enemy ships in adjacent grid cells
-            let row: number, col: number;
             let othership: Ship;
             let teammatesConsidered = 0;
-            for (row = Math.max(p.gy - 1, 0); row < Math.min(p.gy + 2, battleGRID_HEIGHT); row++) {
-                for (col = Math.max(p.gx - 1, 0); col < Math.min(p.gx + 2, battleGRID_WIDTH); col++) {
+            for (let row = Math.max(p.gy - 1, 0); row < Math.min(p.gy + 2, battleGRID_HEIGHT); row++) {
+                for (let col = Math.max(p.gx - 1, 0); col < Math.min(p.gx + 2, battleGRID_WIDTH); col++) {
                     if (grid[row][col].ships.length < 2) continue;
                     for (let i = 0; i < grid[row][col].ships.length; i++) {
                         othership = grid[row][col].ships[i];
@@ -820,14 +627,9 @@ function createBattle() {
     }
     document.getElementById("battleScale").innerHTML = numberCruncher(unitSize, 0);
 
-    let rr = Math.random() * drifterCount;
-    if (rr < 1) {
-        rr = 1;
-    }
-    let ss = Math.random() * probeCount;
-    if (ss < 1) {
-        ss = 1;
-    }
+    let rr = Math.max(1, Math.random() * drifterCount);
+    let ss = Math.max(1, Math.random() * probeCount);
+
     let tt = Math.random() * availableMatter;
 
     battleID++;
@@ -844,10 +646,7 @@ function createBattle() {
         garbageFlag: 0,
     };
 
-    battleLEFTSHIPS = Math.ceil(ss / 1000000);
-    if (battleLEFTSHIPS > 200) {
-        battleLEFTSHIPS = 200;
-    }
+    battleLEFTSHIPS = Math.max(200, Math.ceil(ss / 1000000));
     if (battleLEFTSHIPS == 200) {
         let hinder = Math.random();
         if (hinder < 0.5) {
@@ -855,13 +654,10 @@ function createBattle() {
         }
     }
 
-    battleRIGHTSHIPS = Math.ceil(rr / 1000000);
-    if (battleRIGHTSHIPS > 200) {
-        battleRIGHTSHIPS = 200;
-    }
+    battleRIGHTSHIPS = Math.max(200, Math.ceil(rr / 1000000));
 
     // WARNING: this was just "Battle" before, might need to be fixed?
-    new Battle();
+    // new Battle();
 
     battleName = "Drifter Attack " + newBattle.id;
 
